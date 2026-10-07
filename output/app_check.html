@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>App check | Campus Customs</title>
+    <style>
+      /* Self-contained: no web fonts, scripts or links to the app, so the page works offline from the file. */
+      :root {
+        --navy: #00356b;
+        --navy-deep: #001c3d;
+        --royal: #286dc0;
+        --stone: #f5f1e9;
+        --stone-line: #e6e0d5;
+        --ink: #1a1f26;
+        --ink-soft: #464c55;
+        --pass: #1f7a4d;
+        --pass-pale: #e6f3ec;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #fbf9f5;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16.5px;
+        line-height: 1.6;
+      }
+
+      header {
+        background: var(--navy-deep);
+        color: #fff;
+        border-bottom: 6px double #a9c6ec;
+      }
+
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      header .wrap {
+        padding-top: 40px;
+        padding-bottom: 36px;
+      }
+
+      .kicker {
+        margin: 0;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #a9c6ec;
+      }
+
+      h1,
+      h2 {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      h1 {
+        margin: 8px 0 12px;
+        font-size: clamp(30px, 4vw, 42px);
+        line-height: 1.1;
+      }
+
+      header p.lead {
+        max-width: 54em;
+        margin: 0;
+        color: #d4e1f2;
+      }
+
+      main {
+        padding: 36px 0 64px;
+      }
+
+      .summary {
+        width: 100%;
+        margin: 0 0 12px;
+        border-collapse: collapse;
+        background: #fff;
+        border: 1px solid var(--stone-line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .summary th,
+      .summary td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--stone-line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .summary th {
+        background: var(--stone);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--navy);
+      }
+
+      .summary tr:last-child td {
+        border-bottom: none;
+      }
+
+      .summary a {
+        color: var(--royal);
+        font-weight: 600;
+      }
+
+      .pass {
+        display: inline-block;
+        padding: 1px 10px;
+        border-radius: 999px;
+        background: var(--pass-pale);
+        color: var(--pass);
+        font-size: 13.5px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      section.check {
+        margin-top: 48px;
+        padding-top: 8px;
+      }
+
+      section.check h2 {
+        margin: 0 0 6px;
+        font-size: 27px;
+        line-height: 1.2;
+        color: var(--navy);
+      }
+
+      section.check h2::before {
+        content: '';
+        display: block;
+        width: 46px;
+        height: 6px;
+        margin-bottom: 14px;
+        border-top: 2px solid var(--navy);
+        border-bottom: 2px solid var(--navy);
+      }
+
+      .proves {
+        max-width: 60em;
+        margin: 0 0 18px;
+        font-size: 17.5px;
+      }
+
+      figure {
+        margin: 0;
+      }
+
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--stone-line);
+        border-radius: 12px;
+        box-shadow: 0 18px 40px -22px rgba(0, 28, 61, 0.45);
+        background: #fff;
+      }
+
+      figcaption {
+        margin-top: 8px;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+
+      figcaption a {
+        color: var(--royal);
+        font-weight: 600;
+      }
+
+      .evidence {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border: 1px solid var(--stone-line);
+        border-left: 4px solid var(--navy);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .evidence h3 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--navy);
+      }
+
+      pre {
+        margin: 0 0 10px;
+        padding: 10px 12px;
+        overflow-x: auto;
+        border-radius: 8px;
+        background: var(--stone);
+        font-size: 13.5px;
+        line-height: 1.5;
+      }
+
+      .evidence table {
+        border-collapse: collapse;
+        font-size: 14.5px;
+      }
+
+      .evidence th,
+      .evidence td {
+        padding: 4px 16px 4px 0;
+        text-align: left;
+      }
+
+      .evidence th {
+        color: var(--ink-soft);
+        font-weight: 600;
+      }
+
+      .evidence p {
+        margin: 8px 0 0;
+        font-size: 14.5px;
+        color: var(--ink-soft);
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      footer {
+        border-top: 1px solid var(--stone-line);
+        padding: 20px 0 40px;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <p class="kicker">Campus Customs · Homework 4, Problem 11</p>
+        <h1>Site testing (app check)</h1>
+        <p class="lead">
+          Screenshots of the running website taken on 7 October 2026. The site ran locally (React frontend at
+          localhost:5174, FastAPI backend on port 8001), and the chat answers came live from the shop agent (Claude
+          Opus 5.5 through PydanticAI). Each answer was then checked against <code>data/campus_customs.db</code>.
+        </p>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <table class="summary">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Check</th>
+            <th>What was compared</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><a href="#stock-price">Chat answers a stock and price question</a></td>
+            <td>Basic Hoodie Big Yale: $68.00, 2 left in XL (plus L 8, XXL 25)</td>
+            <td><span class="pass">Pass</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><a href="#category">Asking for hoodies puts product cards on the page</a></td>
+            <td>27 hoodie cards on the results page; 27 hoodies in the database</td>
+            <td><span class="pass">Pass</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><a href="#size-filter">Problem 9 improvement: shop by size</a></td>
+            <td>21 hoodies with M in stock, with each card's M quantity</td>
+            <td><span class="pass">Pass</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section class="check" id="stock-price">
+        <h2>1. Chat answers a stock and price question</h2>
+        <p class="proves">
+          In the live chat, the shopper asked how much the Basic Hoodie Big Yale is and how many are left in XL. The
+          assistant answered $68.00 with only 2 left in XL (and 25 in XXL, 8 in L), exactly the price and quantities
+          stored in the database.
+        </p>
+        <figure>
+          <img
+            src="app_check_images/inventory.png"
+            width="2360"
+            height="1880"
+            alt="Campus Customs home page with the chat open. The shopper asks how much the Basic Hoodie Big Yale is and how many are left in XL; the assistant replies $68.00, only 2 left in XL, with XXL 25 and L 8, and shows a product card for the hoodie."
+          />
+          <figcaption>
+            Home page, guest chat. <a href="app_check_images/inventory.png">Open full size</a>
+          </figcaption>
+        </figure>
+        <div class="evidence">
+          <h3>Database check</h3>
+          <pre><code>SELECT c.name, c.price, i.size, i.quantity
+FROM catalogue c JOIN inventory i ON i.product_id = c.product_id
+WHERE c.product_id = 'basic-hoodie-big-yale' AND i.size IN ('L', 'XL', 'XXL');</code></pre>
+          <table>
+            <thead>
+              <tr><th>name</th><th>price</th><th>size</th><th>quantity</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Basic Hoodie Big Yale</td><td>68.0</td><td>XL</td><td>2</td></tr>
+              <tr><td>Basic Hoodie Big Yale</td><td>68.0</td><td>L</td><td>8</td></tr>
+              <tr><td>Basic Hoodie Big Yale</td><td>68.0</td><td>XXL</td><td>25</td></tr>
+            </tbody>
+          </table>
+          <p>
+            Backend log for this answer: <code>check_size_stock {"product": "Basic Hoodie Big Yale", "size": "XL"}</code>,
+            then the reply. The agent looked the stock up rather than guessing.
+          </p>
+        </div>
+      </section>
+
+      <section class="check" id="category">
+        <h2>2. Asking for hoodies puts matching product cards on the page</h2>
+        <p class="proves">
+          After “Can you show me your hoodies?”, the assistant searched the Hoodies category and the main page switched
+          to a results page with 27 hoodie cards, each with its photo, name, description, price and sizes. That is the
+          same number of hoodies the database holds.
+        </p>
+        <figure>
+          <img
+            src="app_check_images/category_search.png"
+            width="2360"
+            height="1880"
+            alt="The Chat search results page titled Hoodies, saying 27 products match, with hoodie product cards in a grid. The chat panel shows the question Can you show me your hoodies? and the reply saying all 27 hoodies are on the page."
+          />
+          <figcaption>
+            Results page opened by the chat (<code>/search?q=&amp;category=Hoodies</code>).
+            <a href="app_check_images/category_search.png">Open full size</a>
+          </figcaption>
+        </figure>
+        <div class="evidence">
+          <h3>Database check</h3>
+          <pre><code>SELECT COUNT(*) FROM catalogue WHERE lower(garment_type) LIKE '%hood%';   -- 27</code></pre>
+          <p>
+            The shop's Hoodies category is every product whose garment type contains “hood”. Backend log for this
+            answer: <code>search_products {"query": "", "category": "Hoodies"}</code>, then the reply.
+          </p>
+        </div>
+      </section>
+
+      <section class="check" id="size-filter">
+        <h2>3. Problem 9 improvement: shop by size</h2>
+        <p class="proves">
+          With Hoodies and the “In stock in size” filter set to M, the Products page lists only the 21 hoodies that
+          have M in stock, and each card fills in its M box and shows its exact M stock. Both the count and the
+          quantities in the first row (5, 8, 5 and 20) match the database.
+        </p>
+        <figure>
+          <img
+            src="app_check_images/size_filter.png"
+            width="2360"
+            height="1880"
+            alt="The Products page with the Hoodies category and size M selected, reading Showing 21 of 102 products in stock in size M. The first four hoodie cards show their size boxes with M filled in and lines such as Size M: Only 5 left and Size M: 20 in stock."
+          />
+          <figcaption>
+            Products page (<code>/products?category=Hoodies&amp;size=M</code>).
+            <a href="app_check_images/size_filter.png">Open full size</a>
+          </figcaption>
+        </figure>
+        <div class="evidence">
+          <h3>Database check</h3>
+          <pre><code>SELECT COUNT(*) FROM catalogue c JOIN inventory i ON i.product_id = c.product_id
+WHERE lower(c.garment_type) LIKE '%hood%' AND i.size = 'M' AND i.quantity &gt; 0;   -- 21</code></pre>
+          <table>
+            <thead>
+              <tr><th>First row of cards</th><th>M in the database</th><th>Card says</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Basic Hoodie Big Yale</td><td>5</td><td>Only 5 left</td></tr>
+              <tr><td>Brooks Brothers Double Knit Full Zip Hoodie Yale</td><td>8</td><td>8 in stock</td></tr>
+              <tr><td>Champion Full Zip Hood</td><td>5</td><td>Only 5 left</td></tr>
+              <tr><td>Champion Reverse Weave Hoodie 1</td><td>20</td><td>20 in stock</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        Screenshots were taken from the running site in Google Chrome at 1180 × 940 pixels (saved at double
+        resolution), as a guest, so nothing was saved to any account. The images are in
+        <code>app_check_images/</code> next to this file, so this page works without the app running.
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+fastapi==0.142.2
+uvicorn==0.54.0
+python-dotenv==1.2.4
+pydantic-ai-slim==2.54.0
+claude-agent-sdk==0.2.164
